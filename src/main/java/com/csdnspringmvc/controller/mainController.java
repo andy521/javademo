@@ -1,12 +1,14 @@
 package com.csdnspringmvc.controller;
 
+        import com.csdnspringmvc.entity.User;
+        import com.csdnspringmvc.entity.User1;
+        import com.csdnspringmvc.service.User1Service;
+        import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.PathVariable;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
-        import org.springframework.web.bind.annotation.RequestParam;
+        import org.springframework.web.bind.annotation.*;
 
+        import java.util.Date;
         import java.util.Random;
 
 /**
@@ -14,6 +16,9 @@ package com.csdnspringmvc.controller;
  */
 @Controller
 public class mainController {
+    @Autowired
+    private User1Service userService;
+
     @RequestMapping("test/href1")
     public String test1(){
         return "test1";
@@ -52,5 +57,26 @@ public class mainController {
         model.addAttribute("end", end);
         model.addAttribute("fangfa", "POST");
         return  "test4";
+    }
+
+    // 跳转到user提交界面
+    @RequestMapping(value="test/postUser", method= RequestMethod.GET)
+    public String toUserPost(){
+        return "userPost";
+    }
+
+    //提交 保存user
+    @RequestMapping(value="test/postUser", method = RequestMethod.POST)
+    public String doUserPost(@ModelAttribute User1 user, Model model){
+        user.setCreatetime(new Date());
+        String result;
+        if(userService.insert(user) == 1){
+            result = "插入成功！";
+        }else{
+            result = "插入失败！";
+        }
+
+        model.addAttribute("result", result);
+        return "userPost";
     }
 }
