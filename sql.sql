@@ -26,4 +26,3 @@ insert into user1(name, sex, createtime) value('小王',0,now());
 use mytest;
 select * from user1;
 
-

@@ -35,4 +35,6 @@ public interface User1Mapper {
     int getCount();
 
     ArrayList<User1> selectSelective(User1 record);
+
+    ArrayList<User1> selectAll();
 }

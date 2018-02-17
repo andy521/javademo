@@ -8,6 +8,7 @@ package com.csdnspringmvc.controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.*;
 
+        import java.util.ArrayList;
         import java.util.Date;
         import java.util.Random;
 
@@ -78,5 +79,12 @@ public class mainController {
 
         model.addAttribute("result", result);
         return "userPost";
+    }
+
+    @RequestMapping(value="test/getall", method = RequestMethod.GET)
+    public String getAll(Model model){
+        ArrayList<User1> userList = userService.selectAll();
+        model.addAttribute("list", userList);
+        return "userList";
     }
 }

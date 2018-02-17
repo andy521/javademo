@@ -5,6 +5,8 @@ import com.csdnspringmvc.entity.User1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 /**
  * Created by toutou on 2018/2/16.
  */
@@ -15,5 +17,9 @@ public class User1Service {
 
     public int insert(User1 user) {
         return userMapper.insertSelective(user);
+    }
+
+    public ArrayList<User1> selectAll(){
+        return userMapper.selectAll();
     }
 }
